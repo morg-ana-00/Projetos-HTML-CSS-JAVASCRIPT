@@ -6,40 +6,48 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="autor" content="Ana Carolina">
     <link rel="stylesheet" href="style.css">
-    <title>Qr Code Gerador</title>
+    <title>Galeria de Fotos</title>
 </head>
 
 <body>
-        <div class="container">
-            <p>Entre com seu texto ou URL</p>
-            <input type="text" placeholder="Texto ou URL" id="qrtext">
 
-            <div id="imgbox">
-                <img src="" id="qrimage">
+    <div class="galeria-wrap">
+        <img src="img/seta-esquerda.png" id="voltarBtn">
+        <div class="galeria">
+            <div>
+                <span><img src="img/kakashi.png" style="width: 310px;"></span>
+                <span><img src="img/naruto.png"></span>
+                <span><img src="img/neji.png"></span>
             </div>
-
-            <button onclick="generateQR()">Gerar QR Code</button>
+            <div>
+                <span><img src="img/sai.png" style="width: 299px;"></span>
+                <span><img src="img/shikamaru.png"></span>
+                <span><img src="img/shino.png"></span>
+            </div>
         </div>
+        <img src="img/jogar-seta.png" id="avancarBtn">
+    </div>
 
-        <script>
-            let imgbox = document.getElementById("imgbox");
-            let qrimage = document.getElementById("qrimage");
-            let qrtext = document.getElementById("qrtext");
+    <script>
+        let scrollContainer = document.querySelector(".galeria");
+        let voltarBtn = document.getElementById("voltarBtn");
+        let avancarBtn = document.getElementById("avancarBtn");
 
-            function generateQR() {
-                if (qrtext.value.length > 0) {
-                    qrimage.src = "https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=" + qrtext.value;
-                    imgbox.classList.add("show-img");
-                } else {
-                    qrtext.classList.add('error');
-                    setTimeout(()=>{
-                        qrtext.classList.remove('error');
-                    },1000);
-                }
+        scrollContainer.addEventListener("wheel", (evt) => {
+            evt.preventDefault();
+            scrollContainer.scrollLeft += evt.deltaY;
+            scrollContainer.style.scrollBehavior = "auto";
+        });
 
-            }
+        avancarBtn.addEventListener("click", () => {
+            scrollContainer.style.scrollBehavior = "smooth";
+            scrollContainer.scrollLeft += 900;
+        });
+        voltarBtn.addEventListener("click", () => {
+            scrollContainer.style.scrollBehavior = "smooth";
+            scrollContainer.scrollLeft -= 900;
+        });
 
-        </script>
+    </script>
+
 </body>
-
-</html>
